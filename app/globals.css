@@ -12,15 +12,72 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  background: #fff !important;
+  color: #000 !important;
+  @apply bg-white;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  color: #000 !important;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes pulse-once {
+  0% { box-shadow: 0 0 0 0 rgba(236,72,153,0.7); }
+  70% { box-shadow: 0 0 16px 8px rgba(236,72,153,0.3); }
+  100% { box-shadow: 0 0 0 0 rgba(236,72,153,0); }
+}
+.animate-pulse-once {
+  animation: pulse-once 0.8s 1;
+}
+
+.animated-glow {
+  position: relative;
+  z-index: 0;
+  border: 2px solid transparent;
+}
+.animated-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 0.75rem;
+  padding: 2px;
+  background: linear-gradient(270deg, #ec4899, #a21caf, #06b6d4, #ec4899);
+  background-size: 600% 600%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: animated-glow-gradient 8s linear infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.animated-glow:hover::before {
+  opacity: 1;
+}
+@keyframes animated-glow-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-in {
+  animation: fade-in 0.7s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+/* Hide scrollbar for all browsers */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
