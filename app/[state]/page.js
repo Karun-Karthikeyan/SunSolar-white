@@ -69,11 +69,13 @@ export default function StatePage() {
   const [districts, setDistricts] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [loading, setLoading] = useState(true);
 
   // Fetch companies and district JSON
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         // 1. Fetch companies
         const { data: companyData, error: companyError } = await supabase
           .from('solar_companies')
@@ -99,8 +101,10 @@ export default function StatePage() {
         );
         const districtList = key ? districtsObj[key] : [];
         setDistricts(districtList);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setLoading(false);
       }
     };
   
@@ -118,6 +122,17 @@ export default function StatePage() {
   });
 
   return (
+    loading ? (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center">
+          <svg className="animate-spin h-10 w-10 text-pink-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+          </svg>
+          <span className="text-pink-500 text-lg font-semibold">Loading data...</span>
+        </div>
+      </div>
+    ) : (
     <main className="relative bg-white min-h-screen ">
       <section className="flex flex-col md:flex-row gap-8 max-w-[1700px] mx-auto py-20 px-2 mt-15">
         {/* CONTENT */}
@@ -230,5 +245,6 @@ export default function StatePage() {
         </aside>
       </section>
     </main>
+    )
   );
 }

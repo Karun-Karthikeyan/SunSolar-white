@@ -53,20 +53,7 @@ export default function StatesList() {
 
   return (
     <section className="py-15 bg-white relative">
-      {/* Loading Overlay */}
-      {loadingState && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-gray-800 rounded-xl p-8 text-center shadow-2xl border border-gray-700">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto mb-4"></div>
-            <h3 className="text-lg font-semibold text-white mb-2">
-              Loading {indianStates.find(state => state.slug === loadingState)?.name}...
-            </h3>
-            <p className="text-gray-300 text-sm">
-              Finding the best solar companies for you
-            </p>
-          </div>
-        </div>
-      )}
+      
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
