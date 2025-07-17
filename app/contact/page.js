@@ -43,11 +43,11 @@ export default function ContactPage() {
       <section className="py-20 px-4 flex flex-col items-center">
         <div className="max-w-3xl text-center mb-12">
           <h1 className="text-5xl font-extrabold text-blue-700 mb-4 drop-shadow-xl tracking-tight">Contact Us</h1>
-          <p className="text-xl text-gray-700 mb-8 leading-relaxed">We'd love to hear from you! Reach out for quotes, support, or partnership opportunities.</p>
+          <p className="text-xl text-gray-700 mb-8 leading-relaxed">We&apos;d love to hear from you! Reach out for quotes, support, or partnership opportunities.</p>
         </div>
         <div className="max-w-3xl w-full mx-auto bg-white rounded-3xl shadow-2xl border border-blue-200 p-10 md:p-16 backdrop-blur-md">
           {success && (
-            <div className="mb-8 p-4 rounded-lg bg-green-100 text-green-800 text-center font-semibold animate-fade-in">Thank you for contacting us! We'll get back to you soon.</div>
+            <div className="mb-8 p-4 rounded-lg bg-green-100 text-green-800 text-center font-semibold animate-fade-in">Thank you for contacting us! We&apos;ll get back to you soon.</div>
           )}
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             <input
