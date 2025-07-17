@@ -132,6 +132,17 @@ export default function StatePage() {
                   <span className="ml-2 inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-xs ">{selectedDistrict}</span>
                 )}
               </p>
+              {(selectedDistrict || selectedCategory) && (
+                <button
+                  onClick={() => {
+                    setSelectedDistrict('');
+                    setSelectedCategory('');
+                  }}
+                  className="ml-4 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg shadow hover:bg-gray-400 transition-all duration-200 text-sm font-semibold"
+                >
+                  Clear Filters
+                </button>
+              )}
             </div>
             {/* Companies List */}
             <div className="space-y-6 mt-8 w-[100%]">
