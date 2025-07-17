@@ -1,4 +1,5 @@
 import { FaTwitter, FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import Image from 'next/image';
 
 const companies = [
   "SunSolar Company",
@@ -164,9 +165,11 @@ export default function Footer() {
           <h4 className="text-lg font-semibold text-black mb-4">Secure Payment Methods</h4>
           <div className="flex items-center gap-4">
             <div className="bg-gray-800 p-3 rounded-lg border border-gray-600 shadow-sm">
-              <img
+              <Image
                 src="/assets/cards.svg"
                 alt="Payment cards"
+                height={32}
+                width={100}
                 className="h-8 w-auto"
               />
             </div>
