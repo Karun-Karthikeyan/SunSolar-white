@@ -17,9 +17,9 @@ export default function Hero({ title, description }) {
           <div className="max-w-7xl mx-auto px-0 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center h-full">
               {/* Left Content - Text */}
-              <div className="text-black w-full max-w-full lg:max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
+              <div className="text-black w-full max-w-full lg:max-w-2xl mx-auto lg:mx-0 pt-20 text-center text-left xl:pt-5">
                 {/* Badge - only on large screens */}
-                <div className="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium mb-6">
+                <div className="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium mb-6 lg: w-70">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
@@ -36,10 +36,10 @@ export default function Hero({ title, description }) {
                 </p>
                 
                 <div className="flex flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 w-full max-w-xs sm:max-w-md mx-auto lg:mx-0 justify-center">
-                  <button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg max-w-[120px] sm:max-w-none w-auto">
+                  <button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 sm:px-6 md:px-8 py-2.5 sm:py-5 md:py-4 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg max-w-[120px] sm:max-w-none w-auto w-full sm:w-auto">
                     Find Solar Companies
                   </button>
-                  <button className="border-2 border-gray-300 text-white px-3 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:border-pink-400 hover:text-pink-400 transition-all duration-300 max-w-[120px] sm:max-w-none w-auto">
+                  <button className="border-2 border-gray-300 text-white px-3 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:border-pink-400 hover:text-pink-400 transition-all duration-300 max-w-[120px] sm:max-w-none w-auto w-full sm:w-auto">
                     Learn More
                   </button>
                 </div>
@@ -70,7 +70,7 @@ export default function Hero({ title, description }) {
         </div>
         
         {/* Scroll Indicator - only on large screens */}
-        <div className="hidden lg:absolute lg:bottom-8 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:text-white lg:flex lg:flex-col lg:items-center lg:gap-2">
+        <div className="hidden lg:absolute lg:bottom-8 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:text-white lg:flex lg:flex-col lg:items-center lg:gap-2 ml-20 xl:ml-0">
           <span className="text-sm text-gray-300">Scroll to explore</span>
           <div className="w-6 h-10 border-2 border-gray-300 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-pink-500 rounded-full mt-2 animate-bounce"></div>

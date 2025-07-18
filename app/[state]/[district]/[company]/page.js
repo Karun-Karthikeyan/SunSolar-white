@@ -36,8 +36,8 @@ export default function CompanyDetailPage({ params }) {
           </div>
         </div>
       )}
-      <div className="max-w-5xl mx-auto flex flex-col gap-8">
-        <div className="flex-1 bg-gradient-to-br from-white via-gray-100 to-white rounded-2xl shadow-2xl p-12 border border-gray-300 relative">
+      <div className="max-w-6xl mx-auto flex flex-col gap-8 p-8">
+        <div className="flex-1 bg-gradient-to-br from-white via-gray-100 to-white rounded-2xl shadow-2xl p-6 md:p-16 border border-gray-300 relative pb-24 md:pb-0 min-h-[600px]">
           <div className="flex flex-col items-center">
             <div className="w-full flex flex-col items-center">
               <div className="w-full flex justify-center mb-4">
@@ -64,19 +64,33 @@ export default function CompanyDetailPage({ params }) {
             </div>
           </div>
           <hr className="my-6 border-gray-300" />
-          <div>
+          <div className="pb-8">
             <h2 className="text-xl font-bold mb-2 text-black">About {companyData.name}</h2>
             <p className="text-gray-700 mb-4">{companyData.about}</p>
             <h2 className="text-xl font-bold mb-2 text-black">{companyData.name} Timings</h2>
             <p className="text-gray-700">{companyData.timings}</p>
           </div>
           {/* CTA Button - bottom right */}
-          <div className="absolute bottom-6 right-8">
-            <button onClick={() => setShowContactForm(true)} className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition-all duration-200 flex items-center gap-2 text-base">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
-              Contact Now
+          <div className="w-full absolute left-0 bottom-0 md:w-auto md:absolute md:bottom-6 md:right-8 md:left-auto px-0 md:px-0">
+            <button
+              onClick={() => setShowContactForm(true)}
+              className="block w-full py-4 rounded-xl bg-pink-600 hover:bg-pink-700 text-white text-center font-bold text-lg shadow-md md:w-auto md:py-2 md:px-6 md:rounded-lg md:flex md:items-center md:gap-2 md:justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-300 active:scale-95"
+            >
+              <span className="block md:hidden flex flex-col items-center justify-center gap-1">
+                <span className="font-bold text-base">To get the best quote</span>
+                <span className="flex items-center gap-2 font-bold text-lg">
+                  Contact
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </span>
+              <span className="hidden md:flex items-center gap-2 font-bold text-base">
+                Contact Now
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
             </button>
           </div>
         </div>
@@ -88,6 +102,7 @@ export default function CompanyDetailPage({ params }) {
         <h3 className="text-xl font-semibold mt-6 mb-2 text-violet-700">Location, Overview and Description:</h3>
         <p className="mb-4">{companyData.name},{companyData.location},  was established in the year 2017. {companyData.name} , one of the best in the field of Solar Companies in {district}. This well established firm has become popular for its excellent service and customer orientation. With this excellent customer service, they succeeded in getting a huge base of customers, which is increasing day by day.  The dedicated employees of the firm who are committed to their roles and customers, are always ready to extend their service to the customers, to achieve the vision and the larger goals of the company. The company aspires to extend their service to a larger clientele in the coming days. Located at one of the prime locations in the city, is yet aher advantage. As there are various mode of transport available to reach this location, there is absolutely no difficulty in reaching here. The prominent landmark is Near Planetarium.</p>
       </div>
+     
     </div>
   );
 }

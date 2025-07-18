@@ -1,6 +1,8 @@
 import "./globals.css";
 import Navbar from "./components/navbar";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import Footer from "./components/Footer";
+
 
 export const metadata = {
   title: "SunSolar",
@@ -21,6 +23,9 @@ export default function RootLayout({ children }) {
           {children}
           <ScrollToTopButton />
         </section>
+        <footer>
+          <Footer/> 
+        </footer>
       </body>
     </html>
   );

@@ -134,10 +134,34 @@ export default function StatePage() {
       </div>
     ) : (
     <main className="relative bg-white min-h-screen ">
-      <section className="flex flex-col md:flex-row gap-8 max-w-[1700px] mx-auto py-20 px-2 mt-15">
+      <section className="flex flex-col lg:flex-row gap-8 max-w-[1700px] mx-auto py-20 px-2 mt-5">
+        {/* Top Filter Dropdown for Districts - only on <lg screens */}
+        <div className="block lg:hidden w-full mb-8 flex justify-center">
+          <div className="w-full max-w-xs">
+            <label htmlFor="district-select" className="block text-gray-700 font-semibold mb-2">Filter by District</label>
+            <div className="relative">
+              <select
+                id="district-select"
+                value={selectedDistrict}
+                onChange={e => setSelectedDistrict(e.target.value)}
+                className="block w-full px-4 py-2 pr-8 rounded-lg border border-gray-300 bg-white text-gray-800 shadow focus:outline-none focus:ring-2 focus:ring-pink-400 appearance-none"
+              >
+                <option value="">All Districts</option>
+                {districts.map((district) => (
+                  <option key={district} value={district}>{district}</option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* CONTENT */}
-        <div className="flex-1 pt-10">
-          <div className="mb-6">
+        <div className="w-full lg:w-2/3 pt-0 flex flex-col items-center">
+          <div className="mb-6 w-full max-w-2xl flex flex-col items-center">
             <h2 className="text-4xl text-black text-center font-bold mb-2 drop-shadow">Top Solar Companies in {stateName}</h2>
             <p className="text-gray-700 mt-2 mb-4 text-center">Find the best solar companies in {stateName} for your residential and commercial needs.</p>
             <div className="flex items-center justify-center mt-4 w-full">
@@ -159,68 +183,77 @@ export default function StatePage() {
                 </button>
               )}
             </div>
-            {/* Companies List */}
-            <div className="space-y-6 mt-8 w-[100%]">
-              {filteredCompanies.length === 0 ? (
-                <div className="text-center py-0">
-                  <div className="text-gray-400 mb-4">
-                    <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-500 mb-2">No companies found</h3>
-                  <p className="text-gray-400">Try adjusting your filters to see more results.</p>
+          </div>
+          {/* Companies List */}
+          <div className="space-y-6 mt-8 w-full flex flex-col items-center">
+            {filteredCompanies.length === 0 ? (
+              <div className="text-center py-0">
+                <div className="text-gray-400 mb-4">
+                  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
+                  </svg>
                 </div>
-              ) : (
-                filteredCompanies.map((company) => (
-                  <div key={company.slug || company.id} className='w-full lg:w-[70%] h-[220px] flex items-center bg-gradient-to-br from-white via-gray-100 to-white shadow-xl rounded-2xl border-l-8 border-pink-500 hover:scale-105 hover:shadow-2xl transition-all duration-300 mx-auto animate-fade-in'>
-                    <div className='w-[25%] h-full p-7 flex items-center justify-center'>
-                      <div className='w-full h-full bg-gray-200 rounded-lg flex items-center justify-center'>
-                        <span className='text-gray-500 text-2xl'>
-                          <svg className="w-10 h-10 text-pink-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                    <div className='w-[75%] h-full p-7 flex justify-between items-center'>
-                      <div className='w-[70%] h-full flex flex-col justify-center'>
-                        <h5 className='text-2xl font-bold text-black mb-2 flex items-center gap-2'>
+                <h3 className="text-xl font-semibold text-gray-500 mb-2">No companies found</h3>
+                <p className="text-gray-400">Try adjusting your filters to see more results.</p>
+              </div>
+            ) : (
+              filteredCompanies.map((company, idx) => (
+                <div
+                  key={company.slug || company.id}
+                  className="relative w-full sm:max-w-2xl mx-auto overflow-hidden rounded-3xl shadow-xl border border-gray-200 hover:shadow-2xl hover:border-pink-300 transition-all duration-300 mb-8 h-[240px] sm:h-[200px] lg:h-[220px] flex items-stretch"
+                >
+                  {/* Full card background image */}
+                  <img
+                    src="/assets/banner.jpg"
+                    alt="Company Background"
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                  />
+                  {/* Overlay for readability */}
+                  <div className="absolute inset-0 bg-black/30 z-10" />
+                  {/* Card content overlay */}
+                  <div className="relative z-20 flex flex-col justify-between h-full w-full p-8">
+                    <div className="flex justify-between items-start w-full">
+                      <div>
+                        <span className="font-bold text-lg sm:text-xl md:text-2xl text-white flex items-center gap-2 truncate">
                           {company['company-name'] || company.name}
-                          {company.rating && company.rating >= 4.5 && (
-                            <span className="ml-2 px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded-full">Top Rated</span>
-                          )}
-                        </h5>
-                        <p className='text-gray-700 text-sm mb-4 line-clamp-2'>{company.district || company.location}</p>
-                        <a
-                          href={`/${state}/${company.district || company.location}/${company.slug}`}
-                          className='w-[200px] flex items-center gap-2 font-semibold px-4 py-2 rounded-lg shadow transition-colors duration-200 bg-[#FF106E] text-white hover:bg-pink-700 text-center justify-center'
-                        >
-                          View Details
-                          <svg className='w-4 h-4 ml-1' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
-                            <path strokeLinecap='round' strokeLinejoin='round' d='M9 5l7 7-7 7' />
-                          </svg>
-                        </a>
-                      </div>
-                      <div className='flex flex-col items-center justify-center'>
-                        <div className='flex items-center gap-1 mb-1'>
-                          <svg className='w-5 h-5 text-yellow-400' fill='currentColor' viewBox='0 0 20 20'>
-                            <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.455a1 1 0 00-1.175 0l-3.38 2.455c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z' />
-                          </svg>
-                          <span className='text-lg font-bold text-black'>{company.rating || '4.0'}</span>
+                        </span>
+                        <p className="text-xs sm:text-sm md:text-base text-gray-200 mb-1 truncate mt-2">{company.district || company.location}</p>
+                        <div className="flex flex-wrap items-center mt-2 gap-2">
+                          <span className="px-3 py-1 bg-blue-100 bg-opacity-80 text-blue-800 text-xs rounded-full">Residential</span>
+                          <span className="px-3 py-1 bg-green-100 bg-opacity-80 text-green-800 text-xs rounded-full">Commercial</span>
+                          {/* Add more tags as needed */}
                         </div>
-                        <span className='text-xs text-gray-500'>{company.review_count ? `${company.review_count} reviews` : '100 reviews'}</span>
                       </div>
+                      <span className="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-1 align-middle ml-4">
+                        <span className="flex items-center">
+                          <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.455a1 1 0 00-1.175 0l-3.38 2.455c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" />
+                          </svg>
+                          <span className="font-bold text-sm sm:text-base md:text-lg text-white ml-1">{company.rating || '4.0'}</span>
+                        </span>
+                        <span className="text-xs sm:text-xs text-gray-200 mt-1 sm:mt-0">{company.review_count ? `${company.review_count} reviews` : '100 reviews'}</span>
+                      </span>
+                    </div>
+                    <div className="mt-8">
+                      <a
+                        href={`/${state}/${company.district || company.location}/${company.slug}`}
+                        className="w-fit flex items-center gap-2 font-semibold px-5 py-2 text-base rounded-lg shadow transition-colors duration-200 bg-[#FF106E] text-white hover:bg-pink-700 text-center"
+                      >
+                        View Details
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
                     </div>
                   </div>
-                ))
-              )}
-            </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
-        <div className="bg-gray-200 w-[4px] h-[400px] mt-10 rounded-full shadow-md"></div>
-        {/* DISTRICT LIST SIDEBAR */}
-        <aside className="w-[50%] h-auto md:h-[550px] p-5 mt-10 md:w-1/4 p-8 mb-8 md:mb-0 flex flex-col gap-2">
+        <div className="hidden lg:block bg-gray-200 w-[4px] h-[400px] mt-10 rounded-full shadow-md"></div>
+        {/* DISTRICT LIST SIDEBAR - only on lg and up */}
+        <aside className="hidden lg:flex w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-auto md:h-[550px] p-5 mt-5 p-8 mb-8 md:mb-0 flex-col gap-2">
           <h2 className="text-2xl font-bold text-black mb-6">Districts</h2>
           <div className="flex flex-wrap gap-3">
             {districts.map((district) => (

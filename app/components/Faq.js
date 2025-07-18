@@ -43,7 +43,7 @@ const faqs = [
 
 export default function Faq() {
     return (
-        <section className="py-20 bg-gray-900">
+        <section className="py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6">
                 {/* Header Section */}
                 <div className="text-center mb-16">
@@ -53,25 +53,25 @@ export default function Faq() {
                         </svg>
                         Frequently Asked Questions
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-10 mt-5">
+                    <h2 className="text-4xl md:text-5xl font-bold text-black mb-10 mt-5">
                         {header}
                     </h2>
                     <div className="max-w-6xl mx-auto">
-                        <div className="bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-700">
-                            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                        <div className="bg-white rounded-2xl p-10 shadow-lg border border-gray-200">
+                            <p className="text-gray-700 text-lg leading-relaxed mb-6">
                                 We make the best match between the homeowners and the solar installers to help homeowners save tens of thousands of dollars by connecting them with our huge network of solar manufacturers and installers.
                             </p>
-                            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                            <p className="text-gray-700 text-lg leading-relaxed mb-6">
                                 Our mission is to make going solar super-easy with full transparency.
                             </p>
-                            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                            <p className="text-gray-700 text-lg leading-relaxed mb-6">
     We understand how significant this investment is, that is why before enlisting any solar company on our website, we perform a thorough Pre-screening, during that we analyze their customers&apos; reviews, product quality, and their commitment for servicing and maintenance. Once the company satisfies us by meeting our standards and parameters, our admin team provides approval and then their company&apos;s information is updated on the site along with a link through which visitors can connect to them to get answers for their queries and finally get the services.
 </p>
-                            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                            <p className="text-gray-700 text-lg leading-relaxed mb-6">
                                 No matter which company you choose here, you certainly get 25 to 30 years warranty which is nearby half of your life. Such a huge warranty itself speaks for its quality. When it comes to solar installers, you get full-service solar installers who are capable of doing everything related to solar installation.
                             </p>
-                            <p className="text-gray-300 text-lg leading-relaxed">
-    In other words, we call <strong className="text-pink-400">&quot;Sun Solar Company&quot;</strong> a one stop solution provider for all solar PV related needs.
+                            <p className="text-gray-700 text-lg leading-relaxed">
+    In other words, we call <strong className="text-pink-500">&quot;Sun Solar Company&quot;</strong> a one stop solution provider for all solar PV related needs.
 </p>
                         </div>
                     </div>
@@ -80,25 +80,25 @@ export default function Faq() {
                 {/* FAQ Sections */}
                 <div className="grid md:grid-cols-2 gap-12">
                     {/* Why Solar Go Section */}
-                    <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-8">
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl flex items-center justify-center">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <h3 className="text-2xl font-bold text-white">Why Solar Go?</h3>
+                            <h3 className="text-2xl font-bold text-black">Why Solar Go?</h3>
                         </div>
                         <div className="space-y-4">
                             {faqs.map((faq, idx) => (
                                 <Disclosure key={idx}>
                                     {({ open }) => (
-                                        <div className="border border-gray-600 rounded-xl overflow-hidden hover:shadow-md transition-all duration-200">
-                                            <Disclosure.Button className="flex w-full justify-between items-center px-6 py-4 text-left text-lg font-medium text-white hover:bg-gray-700 transition-colors duration-200">
+                                        <div className="border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-all duration-200">
+                                            <Disclosure.Button className="flex w-full justify-between items-center px-6 py-4 text-left text-lg font-medium text-black hover:bg-gray-100 transition-colors duration-200">
                                                 <span className="pr-4">{faq.question}</span>
                                                 <ChevronIcon open={open} />
                                             </Disclosure.Button>
-                                            <Disclosure.Panel className="px-6 pb-4 text-gray-300 text-base leading-relaxed bg-gray-700">
+                                            <Disclosure.Panel className="px-6 pb-4 text-gray-700 text-base leading-relaxed bg-gray-50">
                                                 {faq.answer}
                                             </Disclosure.Panel>
                                         </div>
@@ -109,25 +109,25 @@ export default function Faq() {
                     </div>
 
                     {/* General FAQs Section */}
-                    <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-8">
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
-                            <h3 className="text-2xl font-bold text-white">General FAQs</h3>
+                            <h3 className="text-2xl font-bold text-black">General FAQs</h3>
                         </div>
                         <div className="space-y-4">
                             {faqs.map((faq, idx) => (
                                 <Disclosure key={idx}>
                                     {({ open }) => (
-                                        <div className="border border-gray-600 rounded-xl overflow-hidden hover:shadow-md transition-all duration-200">
-                                            <Disclosure.Button className="flex w-full justify-between items-center px-6 py-4 text-left text-lg font-medium text-white hover:bg-gray-700 transition-colors duration-200">
+                                        <div className="border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-all duration-200">
+                                            <Disclosure.Button className="flex w-full justify-between items-center px-6 py-4 text-left text-lg font-medium text-black hover:bg-gray-100 transition-colors duration-200">
                                                 <span className="pr-4">{faq.question}</span>
                                                 <ChevronIcon open={open} />
                                             </Disclosure.Button>
-                                            <Disclosure.Panel className="px-6 pb-4 text-gray-300 text-base leading-relaxed bg-gray-700">
+                                            <Disclosure.Panel className="px-6 pb-4 text-gray-700 text-base leading-relaxed bg-gray-50">
                                                 {faq.answer}
                                             </Disclosure.Panel>
                                         </div>

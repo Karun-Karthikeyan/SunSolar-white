@@ -30,7 +30,7 @@ export default async function BlogDetailPage({ params }) {
       <main className="bg-white min-h-screen flex items-center justify-center px-4">
         <div className="text-center p-6 border border-red-400 rounded-lg bg-red-50">
           <h1 className="text-2xl font-bold text-red-600 mb-1">404 - Blog Not Found</h1>
-          <p className="text-gray-700 text-base">Sorry, we couldn&apos;t find the blog you&apos;re looking for.</p>
+          <p className="text-gray-700 text-base">Sorry, we couldn't find the blog you're looking for.</p>
         </div>
       </main>
     );
