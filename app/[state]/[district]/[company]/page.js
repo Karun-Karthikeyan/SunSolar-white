@@ -37,7 +37,7 @@ export default function CompanyDetailPage({ params }) {
         </div>
       )}
       <div className="max-w-6xl mx-auto flex flex-col gap-8 p-8">
-        <div className="flex-1 bg-gradient-to-br from-white via-gray-100 to-white rounded-2xl shadow-2xl p-6 md:p-16 border border-gray-300 relative pb-24 md:pb-0 min-h-[600px]">
+        <div className="flex-1 bg-gradient-to-br from-white via-gray-100 to-white rounded-2xl shadow-2xl p-6 md:p-16 border border-gray-300 relative pb-24 md:pb-0 min-h-[700px]">
           <div className="flex flex-col items-center">
             <div className="w-full flex flex-col items-center">
               <div className="w-full flex justify-center mb-4">
