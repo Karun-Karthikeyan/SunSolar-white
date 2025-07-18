@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import Image from 'next/image';
 
 // Custom Dropdown Component
 function CustomDropdown({ options, value, onChange, placeholder, label }) {
@@ -203,11 +204,10 @@ export default function StatePage() {
                   className="relative w-full sm:max-w-2xl mx-auto overflow-hidden rounded-3xl shadow-xl border border-gray-200 hover:shadow-2xl hover:border-pink-300 transition-all duration-300 mb-8 h-[240px] sm:h-[200px] lg:h-[220px] flex items-stretch"
                 >
                   {/* Full card background image */}
-                  <img
+                  <Image
                     src="/assets/banner.jpg"
                     alt="Company Background"
-                    className="absolute inset-0 w-full h-full object-cover z-0"
-                  />
+                    fill className="object-cover absolute inset-0 w-full h-full z-0" priority />
                   {/* Overlay for readability */}
                   <div className="absolute inset-0 bg-black/30 z-10" />
                   {/* Card content overlay */}
