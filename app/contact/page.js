@@ -86,9 +86,9 @@ export default function ContactPage() {
           </form>
           <div className="mt-12 border-t border-blue-200 pt-8">
             <h2 className="text-2xl font-bold text-violet-700 mb-2">Company Info</h2>
-            <p className="text-gray-700 text-lg">SunSolar Company<br/>123 Solar Street<br/>Energy City, 123456</p>
+            <p className="text-gray-700 text-lg">GetSolar Company<br/>123 Solar Street<br/>Energy City, 123456</p>
             <p className="text-gray-700 mt-2 text-lg">Phone: <span className="text-blue-700">+91 98765 43210</span></p>
-            <p className="text-gray-700 text-lg">Email: <span className="text-blue-700">info@sunsolar.com</span></p>
+            <p className="text-gray-700 text-lg">Email: <span className="text-blue-700">info@getsolar.com</span></p>
           </div>
         </div>
       </section>

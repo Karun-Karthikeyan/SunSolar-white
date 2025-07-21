@@ -26,7 +26,7 @@ export default function Howworks() {
     ];
 
     return (
-        <section className="py-20 bg-white">
+        <section className="py-10 bg-white">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Header Section */}
                 <div className="text-center mb-16">
@@ -39,7 +39,7 @@ export default function Howworks() {
                     <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">
                         {header}
                     </h1>
-                    <p className="text-xl text-black max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-xl sm:text-sm text-black max-w-2xl mx-auto leading-relaxed">
                         {para}
                     </p>
                 </div>
@@ -70,16 +70,16 @@ export default function Howworks() {
                                     <div className="flex items-start gap-6 p-6 bg-white rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300 hover:scale-105">
                                         <div className="flex-shrink-0">
                                             <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                                                <span className="text-black font-bold text-xl">
+                                                <span className="text-white font-bold text-xl">
                                                     {step.number}
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="flex-1">
-                                            <h3 className="text-xl font-bold text-black mb-3 group-hover:text-pink-400 transition-colors duration-200">
+                                            <h3 className="text-base sm:text-xl font-bold text-black mb-3 group-hover:text-pink-400 transition-colors duration-200">
                                                 {step.title}
                                             </h3>
-                                            <p className="text-black leading-relaxed">
+                                            <p className="text-sm sm:text-sm text-black leading-relaxed">
                                                 {step.description}
                                             </p>
                                         </div>
@@ -111,7 +111,7 @@ function AnimatedStats() {
         <h4 className="text-3xl font-bold text-black mb-2">
           <CountUp end={inView ? 10000 : 0} duration={2} separator="," />+
         </h4>
-        <p className="text-gray-400">Happy Customers</p>
+        <p className="text-gray-400 text-sm sm:text-sm">Happy Customers</p>
       </div>
       <div className="text-center">
         <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -122,7 +122,7 @@ function AnimatedStats() {
         <h4 className="text-3xl font-bold text-black mb-2">
           <CountUp end={inView ? 500 : 0} duration={2} separator="," />+
         </h4>
-        <p className="text-gray-400">Solar Companies</p>
+        <p className="text-gray-400 text-sm sm:text-sm">Solar Companies</p>
       </div>
       <div className="text-center">
         <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -133,7 +133,7 @@ function AnimatedStats() {
         <h4 className="text-3xl font-bold text-black mb-2">
           $<CountUp end={inView ? 2000000 : 0} duration={2} separator="," />+
         </h4>
-        <p className="text-gray-400">Total Savings</p>
+        <p className="text-gray-400 text-sm sm:text-sm">Total Savings</p>
       </div>
     </div>
   );

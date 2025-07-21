@@ -12,7 +12,7 @@ const ChevronIcon = ({ open }) => (
     </svg>
 );
 
-const header = "What does Sun Solar Company do for you?";
+const header = "What does Get Solar Company do for you?";
 const faqs = [
     {
         question: "What are the benefits of installing solar panels?",
@@ -43,7 +43,7 @@ const faqs = [
 
 export default function Faq() {
     return (
-        <section className="py-20 bg-white">
+        <section className="py-10 bg-white">
             <div className="max-w-6xl mx-auto px-6">
                 {/* Header Section */}
                 <div className="text-center mb-16">
@@ -57,7 +57,7 @@ export default function Faq() {
                         {header}
                     </h2>
                     <div className="max-w-6xl mx-auto">
-                        <div className="bg-white rounded-2xl p-10 shadow-lg border border-gray-200">
+                        <div className="bg-white rounded-2xl p-9 shadow-lg border border-gray-200 text-left">
                             <p className="text-gray-700 text-lg leading-relaxed mb-6">
                                 We make the best match between the homeowners and the solar installers to help homeowners save tens of thousands of dollars by connecting them with our huge network of solar manufacturers and installers.
                             </p>

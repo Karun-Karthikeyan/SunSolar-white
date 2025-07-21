@@ -24,18 +24,15 @@ export default function Network(){
                                 
                                 <h3 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
                                     Join the Network of Installers on 
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500"> Sun Solar Company</span>
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500"> Get Solar Company</span>
                                 </h3>
                                 
-                                <p className="text-xl mb-8 leading-relaxed text-white">
+                                <p className="text-xl  mb-8 l text-white">
                                     Get registered among the top solar installers to have more opportunities to meet solar buyers near you.
                                 </p>
                                 
-                                <div className="flex flex-row gap-3 sm:gap-4 mb-6 w-full max-w-xs sm:max-w-md mx-auto justify-center">
-                                    <button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 sm:px-8 py-2.5 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg max-w-[120px] sm:max-w-none w-auto">
-                                        Learn More
-                                    </button>
-                                    <button className="border-2 border-gray-300 text-white px-3 sm:px-8 py-2.5 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg hover:border-pink-400 hover:text-pink-400 transition-all duration-300 max-w-[120px] sm:max-w-none w-auto">
+                                <div className=" gap-3 sm:gap-4 mb-6 w-full max-w-xs sm:max-w-md lg:mx-0 justify-center sm:justify-start text-left">
+                                    <button className="border-2 border-gray-300 text-white px-3 sm:px-8 py-2.5 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg hover:border-pink-400 hover:text-pink-400 transition-all duration-300 max-w-[200px] sm:max-w-none w-auto">
                                         Get Started
                                     </button>
                                 </div>
@@ -54,19 +51,19 @@ export default function Network(){
                                         <div className="space-y-4 text-left">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                                <span className="text-gray-500">Access to qualified leads</span>
+                                                <span className="text-gray-500 text-sm sm:text-sm">Access to qualified leads</span>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                                <span className="text-gray-500">Verified customer reviews</span>
+                                                <span className="text-gray-500 text-sm sm:text-sm">Verified customer reviews</span>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                                <span className="text-gray-500">Marketing support</span>
+                                                <span className="text-gray-500 text-sm sm:text-sm">Marketing support</span>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                                <span className="text-gray-500">Technical assistance</span>
+                                                <span className="text-gray-500 text-sm sm:text-sm">Technical assistance</span>
                                             </div>
                                         </div>
                                     </div>

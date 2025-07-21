@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: blog?.title || 'Blog Post',
-    description: 'Read full article on solar insights from SunSolar.',
+    description: 'Read full article on solar insights from GetSolar.',
   };
 }
 

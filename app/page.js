@@ -6,7 +6,7 @@ import Faq from "./components/Faq";
 import Network from "./components/Network";
 import Footer from "./components/Footer";
 export const metadata = {
-  title: "SunSolar - Find the Best Solar Companies in India",
+  title: "GetSolar - Find the Best Solar Companies in India",
   description: "Discover top-rated solar companies, compare installers, and learn about solar energy solutions for your home or business. Empowering India with clean, renewable energy.",
 };
 export default function HomePage() {
@@ -17,7 +17,6 @@ export default function HomePage() {
       <Howworks />
       <Faq />
       <Network />
-      <Footer />
     </section>
   );
 }

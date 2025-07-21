@@ -2,7 +2,7 @@ import { FaTwitter, FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn, FaEnvelop
 import Image from 'next/image';
 
 const companies = [
-  "SunSolar Company",
+  "GetSolar Company",
   "Solar Energy Solutions",
   "Green Power Systems",
   "Eco Solar Solutions",
@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-black mb-2">SunSolar Company</h3>
+              <h3 className="text-2xl font-bold text-black mb-2">GetSolar Company</h3>
               <p className="text-black text-sm leading-relaxed">
                 Your trusted partner in finding the best solar energy solutions. 
                 Connect with top-rated solar companies across the nation.
@@ -43,7 +43,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3 text-gray-500">
                 <FaEnvelope className="text-pink-500 w-4 h-4" />
-                <span className="text-sm">info@sunsolar.com</span>
+                <span className="text-sm">info@getsolar.com</span>
               </div>
               <div className="flex items-center gap-3 text-gray-500">
                 <FaMapMarkerAlt className="text-pink-500 w-4 h-4" />
@@ -159,25 +159,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        {/* Payment Methods */}
-        <div className="mb-8">
-          <h4 className="text-lg font-semibold text-black mb-4">Secure Payment Methods</h4>
-          <div className="flex items-center gap-4">
-            <div className="bg-gray-800 p-3 rounded-lg border border-gray-600 shadow-sm">
-              <Image
-                src="/assets/cards.svg"
-                alt="Payment cards"
-                height={32}
-                width={100}
-                className="h-8 w-auto"
-              />
-            </div>
-            <div className="text-sm text-gray-400">
-              <p>We accept all major credit cards and secure payment methods</p>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Bottom Bar */}
@@ -190,7 +171,7 @@ export default function Footer() {
               <a href="#" className="hover:text-pink-400 transition-colors duration-200">Cookie Policy</a>
             </div>
             <div className="text-sm text-gray-700">
-              <p>&copy; 2025 SunSolarCompany.com. All rights reserved.</p>
+              <p>&copy; 2025 GetSolarCompany.com. All rights reserved.</p>
             </div>
           </div>
         </div>

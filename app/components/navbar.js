@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -23,11 +24,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className={`text-xl font-bold text-black relative group`}>
-            <span className="transition-all duration-300 group-hover:text-pink-400 group-hover:scale-105 inline-block">
-              SunSolar
-            </span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+          <Link href="/" className="relative group flex items-center h-12">
+            <Image src="/assets/getsolar-logo.png" alt="GetSolar Logo" width={120} height={40} className="object-contain" priority />
           </Link>
 
           {/* Desktop Navigation */}
@@ -50,10 +48,6 @@ export default function Navbar() {
                 </span>
               </Link>
             ))}
-            {/* Theme Toggle Button */}
-            {/* Remove all theme state, useEffect, and toggleTheme logic */}
-            {/* Remove the theme toggle button from both desktop and mobile menus */}
-            {/* Restore all classNames to use only dark theme classes */}
           </div>
 
           {/* Mobile Menu Button */}

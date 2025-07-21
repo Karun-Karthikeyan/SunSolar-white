@@ -13,11 +13,11 @@ export default function Hero({ title, description }) {
         {/* Remove Gradient Overlay */}
         <div className="absolute inset-0 bg-black to-purple-600 opacity-50"></div>
         {/* Content */}
-        <div className="relative z-10 w-full px-3 py-6 sm:p-8 md:p-10">
-          <div className="max-w-7xl mx-auto px-0 sm:px-6">
+        <div className="relative z-10 w-full px-3 py-6 sm:p-8 py-0 md:p-10">
+          <div className="max-w-7xl mx-auto  sm:px-6 ml-5">
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center h-full">
               {/* Left Content - Text */}
-              <div className="text-black w-full max-w-full lg:max-w-2xl mx-auto lg:mx-0 pt-20 text-center text-left xl:pt-5">
+              <div className=" w-full max-w-full lg:max-w-2xl mx-auto lg:mx-0 pt-10 sm:pt-4 pt-10 text-left xl:pt-5 ">
                 {/* Badge - only on large screens */}
                 <div className="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium mb-6 lg: w-70">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,25 +26,22 @@ export default function Hero({ title, description }) {
                   Your Solar Journey Starts Here
                 </div>
                 
-                <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight w-full max-w-xs xs:max-w-md sm:max-w-lg md:max-w-2xl mx-auto lg:mx-0 text-white">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight w-full max-w-xs xs:max-w-md sm:max-w-lg md:max-w-2xl lg:mx-0 text-white text-left">
                   We Connect You with 
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400"> Right Solar Company</span>
                 </h1>
                 
-                <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed w-full max-w-xs xs:max-w-md sm:max-w-lg md:max-w-2xl mx-auto lg:mx-0 text-white">
+                <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed w-full max-w-xs xs:max-w-md sm:max-w-lg md:max-w-2xl lg:mx-0 text-white text-left">
                   Find the top best solar company in United States in no time. Get multiple quotes and save thousands on your solar installation.
                 </p>
                 
-                <div className="flex flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 w-full max-w-xs sm:max-w-md mx-auto lg:mx-0 justify-center">
-                  <button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 sm:px-6 md:px-8 py-2.5 sm:py-5 md:py-4 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg max-w-[120px] sm:max-w-none w-auto w-full sm:w-auto">
+                <div className="flex flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 w-full max-w-xs sm:max-w-md lg:mx-0 justify-start">
+                  <button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white  px-3 sm:px-6 width-[50%] md:px-8 py-2.5 sm:py-5 md:py-4 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg max-w-[200px] sm:max-w-none w-auto w-full sm:w-auto">
                     Find Solar Companies
-                  </button>
-                  <button className="border-2 border-gray-300 text-white px-3 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:border-pink-400 hover:text-pink-400 transition-all duration-300 max-w-[120px] sm:max-w-none w-auto w-full sm:w-auto">
-                    Learn More
                   </button>
                 </div>
                 {/* Trust Indicators - hidden on mobile */}
-                <div className="hidden sm:flex items-center gap-6 sm:gap-8 text-xs sm:text-sm text-white justify-center lg:justify-start">
+                <div className="hidden sm:flex items-center gap-6 sm:gap-8 text-xs sm:text-sm text-white justify-start">
                   <div className="flex items-center gap-2">
                     <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
