@@ -25,6 +25,12 @@ export default function CompanyDetailPage({ params }) {
 
   return (
     <div className="bg-white min-h-screen py-8 px-2 md:px-0 mt-20">
+      {/* Page Header and Intro Paragraph */}
+      <div className="max-w-3xl mx-auto text-center mb-10">
+        <h1 className="text-3xl md:text-4xl font-bold text-pink-700 mb-3">Solar Company Details</h1>
+        <p className="text-gray-600 text-base md:text-lg">Explore detailed information about this solar company, including services, ratings, and how to get in touch for a personalized quote. Find the best solar solutions for your needs!</p>
+      </div>
+
       {/* Contact Form Modal */}
       {showContactForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10">
@@ -41,10 +47,10 @@ export default function CompanyDetailPage({ params }) {
         </div>
       )}
       {/* Responsive two-column layout for desktop/laptop */}
-      <div className="flex flex-col lg:flex-row gap-8 max-w-8xl mx-80 p-4 ">
+      <div className="flex flex-col lg:flex-row gap-y-8 lg:gap-x-8 max-w-7xl mx-auto px-2 md:px-6 lg:px-4 py-4 ">
         {/* Left side: Existing company detail card */}
-        <div className="flex-1">
-          <div className="rounded-2xl shadow-xl p-10 md:p-10 border border-gray-300 relative pb-24 md:pb-0 min-h-[700px]">
+        <div className="w-full lg:w-10/12 xl:w-11/12 2xl:[width:calc(100%-420px)] min-w-0">
+          <div className="rounded-2xl shadow-xl p-5 md:p-6 border border-gray-300 relative  md:pb-0 min-h-[700px] w-[100%]">
             <div className="flex flex-col items-center">
               <div className="w-full flex flex-col items-center">
                 <div className="w-full flex justify-center mb-5 ">
@@ -77,35 +83,19 @@ export default function CompanyDetailPage({ params }) {
               <h2 className="text-xl font-bold mb-2 text-black">{companyData.name} Timings</h2>
               <p className="text-gray-700">{companyData.timings}</p>
             </div>
-            {/* CTA Button - bottom right (hidden on desktop, visible on mobile/tablet) */}
-            <div className="w-full absolute left-0 bottom-0 md:w-auto md:absolute md:bottom-6 md:right-8 md:left-auto px-0 md:px-0 lg:hidden">
-              <button
-                onClick={() => setShowContactForm(true)}
-                className="block w-full py-4 rounded-xl bg-pink-600 hover:bg-pink-700 text-white text-center font-bold text-lg shadow-md md:w-auto md:py-2 md:px-6 md:rounded-lg md:flex md:items-center md:gap-2 md:justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-300 active:scale-95"
-              >
-                <span className="block md:hidden flex flex-col items-center justify-center gap-1">
-                  <span className="font-bold text-base">To get the best quote</span>
-                  <span className="flex items-center gap-2 font-bold text-lg">
-                    Contact
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </span>
-                <span className="hidden md:flex items-center gap-2 font-bold text-base">
-                  Contact Now
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </button>
+            {/* Detailed Company Content - now always aligned with left card */}
+            <div className="w-full mt-10 px-2 md:px-4 lg:px-1 text-gray-700 text-base leading-relaxed">
+              <h2 className="text-2xl font-bold mb-4 text-blue-700">{companyData.name}, {districtLc}, {stateLc}</h2>
+              <p className="mb-4">{companyData.name} is one of the best in the field of Solar Companies in {districtLc}, {stateLc}.</p>
+              <h3 className="text-xl font-semibold mt-6 mb-2 text-violet-700">Location, Overview and Description:</h3>
+              <p className="mb-4 pb-5">{companyData.name},{companyData.location},  was established in the year 2017. {companyData.name} , one of the best in the field of Solar Companies in {districtLc}. This well established firm has become popular for its excellent service and customer orientation. With this excellent customer service, they succeeded in getting a huge base of customers, which is increasing day by day.  The dedicated employees of the firm who are committed to their roles and customers, are always ready to extend their service to the customers, to achieve the vision and the larger goals of the company. The company aspires to extend their service to a larger clientele in the coming days. Located at one of the prime locations in the city, is yet aher advantage. As there are various mode of transport available to reach this location, there is absolutely no difficulty in reaching here. The prominent landmark is Near Planetarium.</p>
             </div>
           </div>
         </div>
         {/* Right side: Consult card, only on desktop/laptop */}
-        <div className="hidden lg:flex flex-col items-center justify-start w-full max-w-sm">
-          <div className="bg-white rounded-xl shadow-lg p-8 w-full text-center border border-gray-200">
-            <h2 className="text-2xl font-bold mb-2 text-black">Alternative Energy Concepts<br/>Quote</h2>
+        <div className="w-full lg:w-2/5 xl:w-1/3 2xl:w-[400px] min-w-0 flex flex-col items-end justify-center h-full self-stretch align-right">
+          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full text-center border border-gray-200 h-full flex flex-col justify-between 2xl:w-[400px] 2xl:h-[400px]">
+            <h2 className="text-2xl font-bold mb-2 text-black mt-1">Alternative Energy Concepts Quote</h2>
             <p className="text-gray-700 mb-2">Are you looking for a {companyData.location} Solar company?</p>
             <p className="text-gray-700 mb-2">We made it easier to get quote from best Solar companies near you. Get personalised quotes from atleast 5 best Solar energy professionals for free.</p>
             <button
@@ -117,15 +107,24 @@ export default function CompanyDetailPage({ params }) {
               </svg>
               <span className="font-bold">Consult Now</span>
             </button>
+            {/* FAQ Accordion Section */}
+            <div className="mt-25 text-left w-full">
+              <h4 className="text-lg font-bold text-pink-700 mb-3">FAQ</h4>
+              <details className="mb-2 rounded-lg border border-pink-100 bg-pink-50 px-4 py-2">
+                <summary className="cursor-pointer font-semibold text-gray-800">How long does installation take?</summary>
+                <p className="mt-2 text-gray-600 text-sm">Most residential solar installations are completed within 2-4 days, depending on the project size and weather conditions.</p>
+              </details>
+              <details className="mb-2 rounded-lg border border-pink-100 bg-pink-50 px-4 py-2">
+                <summary className="cursor-pointer font-semibold text-gray-800">Do you offer maintenance services?</summary>
+                <p className="mt-2 text-gray-600 text-sm">Yes, we provide ongoing maintenance and support to ensure your solar system runs efficiently for years to come.</p>
+              </details>
+              <details className="mb-2 rounded-lg border border-pink-100 bg-pink-50 px-4 py-2">
+                <summary className="cursor-pointer font-semibold text-gray-800">Is financing available?</summary>
+                <p className="mt-2 text-gray-600 text-sm">We offer flexible financing options to make solar affordable for everyone. Contact us for more details.</p>
+              </details>
+            </div>
           </div>
         </div>
-      </div>
-      {/* Detailed Company Content */}
-      <div className="max-w-5xl mx-85 mt-10 px-2 md:px-0 text-gray-700 text-base leading-relaxed">
-        <h2 className="text-2xl font-bold mb-4 text-blue-700">{companyData.name}, {districtLc}, {stateLc}</h2>
-        <p className="mb-4">{companyData.name} is one of the best in the field of Solar Companies in {districtLc}, {stateLc}.</p>
-        <h3 className="text-xl font-semibold mt-6 mb-2 text-violet-700">Location, Overview and Description:</h3>
-        <p className="mb-4">{companyData.name},{companyData.location},  was established in the year 2017. {companyData.name} , one of the best in the field of Solar Companies in {districtLc}. This well established firm has become popular for its excellent service and customer orientation. With this excellent customer service, they succeeded in getting a huge base of customers, which is increasing day by day.  The dedicated employees of the firm who are committed to their roles and customers, are always ready to extend their service to the customers, to achieve the vision and the larger goals of the company. The company aspires to extend their service to a larger clientele in the coming days. Located at one of the prime locations in the city, is yet aher advantage. As there are various mode of transport available to reach this location, there is absolutely no difficulty in reaching here. The prominent landmark is Near Planetarium.</p>
       </div>
     </div>
   );
