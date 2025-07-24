@@ -25,7 +25,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="relative group flex items-center h-12">
-            <Image src="/assets/getsolar-logo.png" alt="GetSolar Logo" width={120} height={40} className="object-contain" priority />
+            <Image src="/assets/sunlogo.png" alt="Sun Logo" width={120} height={40} className="object-contain" priority />
           </Link>
 
           {/* Desktop Navigation */}

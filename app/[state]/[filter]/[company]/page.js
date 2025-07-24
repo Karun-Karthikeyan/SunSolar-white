@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState } from 'react';
+import { use, useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export default function CompanyDetailPage({ params }) {
@@ -11,20 +11,37 @@ export default function CompanyDetailPage({ params }) {
   // Title case for display
   const name = companyLc.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   const [showContactForm, setShowContactForm] = useState(false);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const capitalizeFirstLetter = (str) => {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
   // Mock data for demonstration
   const companyData = {
     name,
     image: '/assets/2.jpg',
     rating: 4.5,
-    location: `${districtLc}, ${stateLc}`,
+    location: `${capitalizeFirstLetter(districtLc)}, ${capitalizeFirstLetter(stateLc)}`,
     about: `${name} is a leading provider of solar energy solutions, offering residential, commercial, and industrial solar panel installations. Our mission is to make clean energy accessible and affordable for everyone.`,
     timings: 'Mon-Sat: 9:00 AM - 6:00 PM, Sun: Closed',
     categories: ['Residential', 'Commercial', 'On-Grid'],
   };
+  console.log('Company Location:', companyData.location);
 
   return (
-    <div className="bg-white min-h-screen py-8 px-2 md:px-0 mt-20">
+    <div className="bg-white min-h-screen py-8 px-2 md:px-0 mt-20 relative">
+      {/* Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-pink-500"></div>
+        </div>
+      )}
       {/* Page Header and Intro Paragraph */}
       <div className="max-w-3xl mx-auto text-center mb-10">
         <h1 className="text-3xl md:text-4xl font-bold text-pink-700 mb-3">Solar Company Details</h1>
@@ -65,11 +82,21 @@ export default function CompanyDetailPage({ params }) {
                 </div>
                 {/* Category Badges */}
                 <div className="flex flex-wrap gap-2 mt-2 mb-2 w-full justify-start mt-3">
-                  {companyData.categories.map((cat) => (
-                    <span key={cat} className="inline-block bg-pink-100 text-pink-800 px-2 py-1 rounded text-xs font-medium border border-pink-300">
-                      {cat}
-                    </span>
-                  ))}
+                  {companyData.categories.map((cat) => {
+                    let badgeClass = '';
+                    if (cat === 'Residential') badgeClass = 'bg-green-100 text-green-800 border-green-300';
+                    else if (cat === 'Commercial') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
+                    else if (cat === 'On-Grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
+                    else badgeClass = 'bg-pink-100 text-pink-800 border-pink-300';
+                    return (
+                      <span
+                        key={cat}
+                        className={`inline-block px-3 py-1 rounded-full text-sm font-medium border ${badgeClass}`}
+                      >
+                        {cat}
+                      </span>
+                    );
+                  })}
                 </div>
                 <div className="w-full flex justify-start">
                   <span className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded mt-2">Solar company in {companyData.location}</span>
@@ -85,10 +112,10 @@ export default function CompanyDetailPage({ params }) {
             </div>
             {/* Detailed Company Content - now always aligned with left card */}
             <div className="w-full mt-10 px-2 md:px-4 lg:px-1 text-gray-700 text-base leading-relaxed">
-              <h2 className="text-2xl font-bold mb-4 text-blue-700">{companyData.name}, {districtLc}, {stateLc}</h2>
-              <p className="mb-4">{companyData.name} is one of the best in the field of Solar Companies in {districtLc}, {stateLc}.</p>
+              <h2 className="text-2xl font-bold mb-4 text-blue-700">{companyData.name}, {capitalizeFirstLetter(districtLc)}, {capitalizeFirstLetter(stateLc)}</h2>
+              <p className="mb-4">{companyData.name} is one of the best in the field of Solar Companies in {capitalizeFirstLetter(districtLc)}, {capitalizeFirstLetter(stateLc)}.</p>
               <h3 className="text-xl font-semibold mt-6 mb-2 text-violet-700">Location, Overview and Description:</h3>
-              <p className="mb-4 pb-5">{companyData.name},{companyData.location},  was established in the year 2017. {companyData.name} , one of the best in the field of Solar Companies in {districtLc}. This well established firm has become popular for its excellent service and customer orientation. With this excellent customer service, they succeeded in getting a huge base of customers, which is increasing day by day.  The dedicated employees of the firm who are committed to their roles and customers, are always ready to extend their service to the customers, to achieve the vision and the larger goals of the company. The company aspires to extend their service to a larger clientele in the coming days. Located at one of the prime locations in the city, is yet aher advantage. As there are various mode of transport available to reach this location, there is absolutely no difficulty in reaching here. The prominent landmark is Near Planetarium.</p>
+              <p className="mb-4 pb-5">{companyData.name},{companyData.location},  was established in the year 2017. {companyData.name} , one of the best in the field of Solar Companies in {capitalizeFirstLetter(districtLc)}. This well established firm has become popular for its excellent service and customer orientation. With this excellent customer service, they succeeded in getting a huge base of customers, which is increasing day by day.  The dedicated employees of the firm who are committed to their roles and customers, are always ready to extend their service to the customers, to achieve the vision and the larger goals of the company. The company aspires to extend their service to a larger clientele in the coming days. Located at one of the prime locations in the city, is yet aher advantage. As there are various mode of transport available to reach this location, there is absolutely no difficulty in reaching here. The prominent landmark is Near Planetarium.</p>
             </div>
           </div>
         </div>
@@ -108,7 +135,7 @@ export default function CompanyDetailPage({ params }) {
               <span className="font-bold">Consult Now</span>
             </button>
             {/* FAQ Accordion Section */}
-            <div className="mt-25 text-left w-full">
+            <div className="mt-30 text-left w-full md:mt-30 sm:mt-15">
               <h4 className="text-lg font-bold text-pink-700 mb-3">FAQ</h4>
               <details className="mb-2 rounded-lg border border-pink-100 bg-pink-50 px-4 py-2">
                 <summary className="cursor-pointer font-semibold text-gray-800">How long does installation take?</summary>

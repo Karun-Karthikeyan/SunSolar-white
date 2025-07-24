@@ -4,13 +4,15 @@ import { useRef, useEffect, useState } from 'react';
 export default function StateCompanyLayout({
   companies,
   districts,
+  categories, // NEW
   selectedDistrict,
-  selectedCategory,
   setSelectedDistrict,
-  setSelectedCategory,
+  selectedCategory, // NEW
+  setSelectedCategory, // NEW
   loading,
   stateName,
   handleDistrictChange,
+  handleCategoryChange, // NEW
   handleClearFilters,
   filteredCompanies
 }) {
@@ -34,6 +36,7 @@ export default function StateCompanyLayout({
               <p className="text-base text-gray-700 text-center mb-4">{filteredCompanies.length} compan{filteredCompanies.length !== 1 ? 'ies' : 'y'} found</p>
               {/* Responsive filter dropdown and button */}
               <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 w-full justify-center mb-4 relative">
+                {/* District Filter */}
                 <div className="relative w-64 mx-auto">
                   <select
                     value={selectedDistrict || ''}
@@ -43,7 +46,7 @@ export default function StateCompanyLayout({
                     style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }}
                   >
                     <option value="" className="text-gray-400">All Districts</option>
-                    {districts.map((district) => (
+                    {districts && districts.map((district) => (
                       <option key={district} value={district} className="text-gray-700 font-medium bg-white hover:bg-pink-50">
                         {district}
                       </option>
@@ -56,13 +59,15 @@ export default function StateCompanyLayout({
                     </svg>
                   </div>
                 </div>
-                {selectedDistrict && (
+            
+                {/* Only one clear filter button for both filters */}
+                {(selectedDistrict || selectedCategory) && (
                   <button
-                    onClick={() => handleDistrictChange('')}
+                    onClick={handleClearFilters}
                     className="w-full md:w-auto px-5 py-2 rounded-full border border-pink-400 text-pink-600 bg-pink-50 font-semibold transition-all duration-200 hover:bg-pink-100 hover:text-pink-800 shadow-sm whitespace-nowrap"
                     disabled={loading}
                   >
-                    Clear Filter
+                    Clear Filters
                   </button>
                 )}
               </div>
@@ -98,48 +103,51 @@ export default function StateCompanyLayout({
                 filteredCompanies.map((company, idx) => (
                   <div
                     key={company.slug || company.id}
-                    className="relative w-full max-w-[350px] h-[250px] md:h-[250px] xl:h-[250px] bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between"
-                    style={{ minWidth: '0', height: window.innerWidth < 1280 ? '280px' : '250px', marginBottom: window.innerWidth < 1280 ? '24px' : '0' }}
+                    className="w-full max-w-[370px] min-h-[320px] bg-white rounded-xl shadow-md flex flex-col border border-gray-100 transition-all duration-300 p-6 mb-6 hover:shadow-2xl hover:scale-[1] hover:-translate-y-1 hover:border-pink-200"
+                    style={{ minWidth: '0' }}
                   >
-                    {/* Card background image */}
-                    <img
-                      src="/assets/banner.jpg"
-                      alt="Company Background"
-                      className="absolute inset-0 w-full h-full object-cover z-0"
-                    />
-                    {/* Overlay for readability */}
-                    <div className="absolute inset-0 bg-black/40 z-10" />
-                    {/* Card content overlay */}
-                    <div className="relative z-20 flex flex-col h-full p-6">
-                      <div>
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-bold text-lg text-white">{company['company-name'] || company.name}</span>
-                          <span className="flex items-center gap-1">
-                            <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.455a1 1 0 00-1.175 0l-3.38 2.455c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" />
-                            </svg>
-                            <span className="font-bold text-white text-sm">{company.rating || '4.3'}</span>
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-gray-200">{company.district || company.location}</span>
-                          <span className="text-xs text-gray-200">{company.review_count ? `${company.review_count} reviews` : '100 reviews'}</span>
-                        </div>
-                        <div className="flex flex-wrap gap-2 mb-2">
-                          <span className="px-3 py-1 bg-black/30 text-pink-300 text-xs rounded-full border border-pink-400">Residential</span>
-                          <span className="px-3 py-1 bg-black/30 text-pink-300 text-xs rounded-full border border-pink-400">Residential</span>
-                          {/* Add more tags as needed */}
-                        </div>
-                        <p className="text-sm text-gray-200 mb-4 line-clamp-3">{company.description || 'SunPlus is a leading provider of solar energy solutions, offering residential, commercial, and industrial solar panel installations.'}</p>
+                    <div className="flex flex-col flex-1 justify-between h-full">
+                      {/* Top: Name & Rating */}
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-bold text-lg text-gray-900">{company['company-name'] || company.name}</span>
+                        <span className="flex items-center gap-1">
+                          <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.455a1 1 0 00-1.175 0l-3.38 2.455c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" />
+                          </svg>
+                          <span className="font-semibold text-yellow-700 text-sm">{company.rating || '4.3'}</span>
+                        </span>
                       </div>
-                      <div className="mt-auto flex items-end">
-                        <Link
-                          href={`/${stateName.replace(/\s+/g, '-').toLowerCase()}/${(company.district || company.location)?.replace(/\s+/g, '-').toLowerCase()}/${(company.slug || '').toLowerCase()}`}
-                          className="w-40 flex items-center justify-center font-semibold px-5 py-1 text-base rounded-full shadow transition-colors duration-200 bg-[#C026D3] text-white hover:bg-pink-700 text-center"
-                        >
-                          View Details
-                        </Link>
+                      {/* Location & Reviews */}
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm text-gray-500">{company.district || company.location}</span>
+                        <span className="text-xs text-gray-400">{company.review_count ? `${company.review_count} reviews` : '100 reviews'}</span>
                       </div>
+                      <hr className="my-2 border-gray-100" />
+                      {/* Description */}
+                      <p className="text-sm text-gray-700 mb-4 line-clamp-3">{company.description || `${company['company-name'] || company.name} is a leading provider of solar energy solutions, offering residential, commercial, and industrial solar panel installations.`}</p>
+                      {/* Tags (category badge) */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {(() => {
+                          let badgeClass = '';
+                          let label = company.category || 'Other';
+                          if (label.toLowerCase() === 'residential') badgeClass = 'bg-green-100 text-green-800 border-green-300';
+                          else if (label.toLowerCase() === 'commercial') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
+                          else if (label.toLowerCase() === 'on-grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
+                          else badgeClass = 'bg-pink-100 text-pink-700 border-pink-200';
+                          // Capitalize first letter
+                          const capLabel = label.charAt(0).toUpperCase() + label.slice(1);
+                          return (
+                            <span className={`px-3 py-1 text-xs rounded-full font-semibold border ${badgeClass}`}>{capLabel}</span>
+                          );
+                        })()}
+                      </div>
+                      {/* Button */}
+                      <Link
+                        href={`/${stateName.replace(/\s+/g, '-').toLowerCase()}/${(company.district || company.category)?.replace(/\s+/g, '-').toLowerCase()}/${(company.slug || '').toLowerCase()}`}
+                        className="w-full block font-semibold px-4 py-2 text-base rounded-lg shadow-sm transition-colors duration-200 bg-pink-600 text-white hover:bg-pink-700 text-center mt-auto"
+                      >
+                        View Details
+                      </Link>
                     </div>
                   </div>
                 ))
