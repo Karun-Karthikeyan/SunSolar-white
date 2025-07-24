@@ -44,7 +44,7 @@ const faqs = [
 export default function Faq() {
     return (
         <section className="py-10 bg-white">
-            <div className="max-w-6xl mx-auto px-6">
+            <div className="max-w-7xl mx-auto px-4">
                 {/* Header Section */}
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium mb-6">
@@ -56,8 +56,8 @@ export default function Faq() {
                     <h2 className="text-4xl md:text-5xl font-bold text-black mb-10 mt-5">
                         {header}
                     </h2>
-                    <div className="max-w-6xl mx-auto">
-                        <div className="bg-white rounded-2xl p-9 shadow-lg border border-gray-200 text-left">
+                    <div>
+                        <div className="bg-white rounded-2xl p-9 shadow-lg border border-gray-200 text-left w-full">
                             <p className="text-gray-700 text-lg leading-relaxed mb-6">
                                 We make the best match between the homeowners and the solar installers to help homeowners save tens of thousands of dollars by connecting them with our huge network of solar manufacturers and installers.
                             </p>
