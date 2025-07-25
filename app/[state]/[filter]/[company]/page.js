@@ -3,37 +3,62 @@
 import { use, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function CompanyDetailPage({ params }) {
+  const router = useRouter();
   const { state, district, company } = use(params);
   const stateLc = state?.toLowerCase();
   const districtLc = district?.toLowerCase();
   const companyLc = company?.toLowerCase();
-  // Title case for display
-  const name = companyLc.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   const [showContactForm, setShowContactForm] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [companyData, setCompanyData] = useState(null);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
+    const fetchCompany = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('solar_companies')
+        .select('*')
+        .eq('slug', companyLc)
+        .single();
+      if (error || !data) {
+        setNotFound(true);
+        setLoading(false);
+        return;
+      }
+      setCompanyData(data);
+      setLoading(false);
+    };
+    fetchCompany();
+  }, [companyLc]);
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-pink-500"></div>
+      </div>
+    );
+  }
+
+  if (notFound) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold text-pink-600 mb-4">404 - Company Not Found</h1>
+        <p className="text-gray-600 mb-8">The company you are looking for does not exist or the URL is incorrect.</p>
+        <Link href={`/${stateLc}`}
+          className="px-6 py-2 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition">Back to State</Link>
+      </div>
+    );
+  }
 
   const capitalizeFirstLetter = (str) => {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
-  // Mock data for demonstration
-  const companyData = {
-    name,
-    image: '/assets/2.jpg',
-    rating: 4.5,
-    location: `${capitalizeFirstLetter(districtLc)}, ${capitalizeFirstLetter(stateLc)}`,
-    about: `${name} is a leading provider of solar energy solutions, offering residential, commercial, and industrial solar panel installations. Our mission is to make clean energy accessible and affordable for everyone.`,
-    timings: 'Mon-Sat: 9:00 AM - 6:00 PM, Sun: Closed',
-    categories: ['Residential', 'Commercial', 'On-Grid'],
-  };
-  console.log('Company Location:', companyData.location);
 
   return (
     <div className="bg-white min-h-screen py-8 px-2 md:px-0 mt-20 relative">
@@ -54,7 +79,7 @@ export default function CompanyDetailPage({ params }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10">
           <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
             <button onClick={() => setShowContactForm(false)} className="absolute top-3 right-3 text-gray-500 hover:text-pink-400 text-2xl font-bold">&times;</button>
-            <h2 className="text-2xl font-bold text-black mb-4">Contact {companyData.name}</h2>
+            <h2 className="text-2xl font-bold text-black mb-4">Contact {companyData.name || companyData['company-name'] || 'Company'}</h2>
             <form className="flex flex-col gap-4">
               <input type="text" placeholder="Your Name" className="px-4 py-2 rounded bg-gray-100 text-black border border-gray-300 focus:ring-2 focus:ring-pink-400" />
               <input type="email" placeholder="Your Email" className="px-4 py-2 rounded bg-gray-100 text-black border border-gray-300 focus:ring-2 focus:ring-pink-400" />
@@ -72,54 +97,91 @@ export default function CompanyDetailPage({ params }) {
             <div className="flex flex-col items-center">
               <div className="w-full flex flex-col items-center">
                 <div className="w-full flex justify-center mb-5 ">
-                  <Image src={companyData.image} alt={companyData.name} width={800} height={100} className="object-contain rounded" />
+                  <Image src={companyData.image || '/assets/2.jpg'} alt={companyData.name || companyData['company-name'] || 'Company'} width={800} height={100} className="object-contain rounded" />
                 </div>
                 <div className="flex items-center gap-4 w-full justify-between">
-                  <h1 className="text-2xl font-bold text-black">{companyData.name}</h1>
+                  <div>
+                    <h1 className="text-2xl font-bold text-black">{companyData.name || companyData['company-name'] || 'Company'}</h1>
+                    {/* Category Badges */}
+                    <div className="flex flex-wrap gap-2 mt-2 mb-2 w-full justify-start">
+                      {(() => {
+                        let categories = companyData.categories;
+                        if (!categories && companyData.category) categories = companyData.category;
+                        if (!Array.isArray(categories)) categories = [];
+                        return (categories.length > 0 ? categories : []).map((cat) => {
+                          if (typeof cat !== 'string' || !cat.trim()) return null;
+                          const catLc = cat.trim().toLowerCase();
+                          const displayCat = cat.replace(/\b\w/g, c => c.toUpperCase());
+                          let badgeClass = '';
+                          if (catLc === 'residential') badgeClass = 'bg-green-100 text-green-800 border-green-300';
+                          else if (catLc === 'commercial') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
+                          else if (catLc === 'on-grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
+                          else badgeClass = 'bg-pink-100 text-pink-700 border-pink-200';
+                          return (
+                            <Link
+                              key={cat}
+                              href={`/${stateLc}/${catLc}`}
+                              className={`inline-block px-3 py-1 rounded-full text-sm font-medium border ${badgeClass} hover:underline`}
+                            >
+                              {displayCat}
+                            </Link>
+                          );
+                        });
+                      })()}
+                    </div>
+                  </div>
                   <div className="flex items-center gap-1">
                     <span className="bg-pink-100 text-pink-800 px-3 py-1 rounded text-sm font-semibold">{companyData.rating}</span>
                     <span className="text-gray-500 text-sm">Ratings</span>
                   </div>
                 </div>
-                {/* Category Badges */}
-                <div className="flex flex-wrap gap-2 mt-2 mb-2 w-full justify-start mt-3">
-                  {companyData.categories.map((cat) => {
-                    const catLc = typeof cat === 'string' ? cat.trim().toLowerCase() : '';
-                    const displayCat = typeof cat === 'string' ? cat.replace(/\b\w/g, c => c.toUpperCase()) : '';
-                    let badgeClass = '';
-                    if (catLc === 'residential') badgeClass = 'bg-green-100 text-green-800 border-green-300';
-                    else if (catLc === 'commercial') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
-                    else if (catLc === 'on-grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
-                    else badgeClass = 'bg-pink-100 text-pink-700 border-pink-200';
-                    return (
-                      <Link
-                        key={cat}
-                        href={`/${stateLc}/${catLc}`}
-                        className={`inline-block px-3 py-1 rounded-full text-sm font-medium border ${badgeClass} hover:underline`}
-                      >
-                        {displayCat}
-                      </Link>
-                    );
-                  })}
-                </div>
                 <div className="w-full flex justify-start">
-                  <span className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded mt-2">Solar company in {companyData.location}</span>
+                  {(() => {
+                    const locationText =
+                      companyData.location ||
+                      (companyData.district && companyData['state-name']
+                        ? `${companyData.district}, ${companyData['state-name']}`
+                        : companyData.district || companyData['state-name'] || 'Unknown location');
+                    return (
+                      <span className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded mt-2">
+                        Solar company in {locationText}
+                      </span>
+                    );
+                  })()}
                 </div>
               </div>
             </div>
             <hr className="my-6 border-gray-300" />
             <div className="pb-8">
-              <h2 className="text-xl font-bold mb-2 text-black">About {companyData.name}</h2>
-              <p className="text-gray-700 mb-4">{companyData.about}</p>
-              <h2 className="text-xl font-bold mb-2 text-black">{companyData.name} Timings</h2>
-              <p className="text-gray-700">{companyData.timings}</p>
+              <h2 className="text-xl font-bold mb-2 text-black">About {companyData.name || companyData['company-name'] || 'Company'}</h2>
+              <p className="text-gray-700 mb-4">
+                {(companyData.name || companyData['company-name'] || 'This company')} is a leading provider of solar energy solutions, offering residential, commercial, and industrial solar panel installations. Our mission is to make clean energy accessible and affordable for everyone.
+              </p>
+              <h2 className="text-xl font-bold mb-2 text-black">{companyData.name || companyData['company-name'] || 'Company'} Timings</h2>
+              <p className="text-gray-700">Mon-Sat: 9:00 AM - 6:00 PM, Sun: Closed</p>
             </div>
             {/* Detailed Company Content - now always aligned with left card */}
             <div className="w-full mt-10 px-2 md:px-4 lg:px-1 text-gray-700 text-base leading-relaxed">
-              <h2 className="text-2xl font-bold mb-4 text-blue-700">{companyData.name}, {capitalizeFirstLetter(districtLc)}, {capitalizeFirstLetter(stateLc)}</h2>
-              <p className="mb-4">{companyData.name} is one of the best in the field of Solar Companies in {capitalizeFirstLetter(districtLc)}, {capitalizeFirstLetter(stateLc)}.</p>
+              <h2 className="text-2xl font-bold mb-4 text-blue-700">
+                {(companyData.name || companyData['company-name'] || 'Company')}
+                {companyData.district ? `, ${companyData.district}` : ''}
+                {companyData['state-name'] ? `, ${companyData['state-name']}` : ''}
+              </h2>
+              <p className="mb-4">
+                {(companyData.name || companyData['company-name'] || 'This company')} is one of the best in the field of Solar Companies in
+                {companyData.district ? ` ${companyData.district},` : ''}
+                {companyData['state-name'] ? ` ${companyData['state-name']}` : ''}.
+              </p>
               <h3 className="text-xl font-semibold mt-6 mb-2 text-violet-700">Location, Overview and Description:</h3>
-              <p className="mb-4 pb-5">{companyData.name},{companyData.location},  was established in the year 2017. {companyData.name} , one of the best in the field of Solar Companies in {capitalizeFirstLetter(districtLc)}. This well established firm has become popular for its excellent service and customer orientation. With this excellent customer service, they succeeded in getting a huge base of customers, which is increasing day by day.  The dedicated employees of the firm who are committed to their roles and customers, are always ready to extend their service to the customers, to achieve the vision and the larger goals of the company. The company aspires to extend their service to a larger clientele in the coming days. Located at one of the prime locations in the city, is yet aher advantage. As there are various mode of transport available to reach this location, there is absolutely no difficulty in reaching here. The prominent landmark is Near Planetarium.</p>
+              <p className="mb-4 pb-5">
+                {(companyData.name || companyData['company-name'] || 'This company')}
+                {companyData.district ? `, ${companyData.district}` : ''}
+                {companyData['state-name'] ? `, ${companyData['state-name']}` : ''}
+                {companyData.year_established ? `, was established in the year ${companyData.year_established}.` : '.'}
+                {(companyData.name || companyData['company-name'] || 'This company')} is one of the best in the field of Solar Companies in
+                {companyData.district ? ` ${companyData.district}` : ''}.
+                This well established firm has become popular for its excellent service and customer orientation. With this excellent customer service, they succeeded in getting a huge base of customers, which is increasing day by day. The dedicated employees of the firm who are committed to their roles and customers, are always ready to extend their service to the customers, to achieve the vision and the larger goals of the company. The company aspires to extend their service to a larger clientele in the coming days. Located at one of the prime locations in the city, is yet another advantage. As there are various mode of transport available to reach this location, there is absolutely no difficulty in reaching here. The prominent landmark is Near Planetarium.
+              </p>
             </div>
           </div>
         </div>

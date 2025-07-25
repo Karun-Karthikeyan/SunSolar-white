@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import StateCompanyLayout from '../../components/StateCompanyLayout';
+import Link from 'next/link';
 
 export default function StateFilterPage() {
   const params = useParams();
@@ -20,6 +21,7 @@ export default function StateFilterPage() {
   const [districts, setDistricts] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   const handleDistrictChange = (district) => {
     const districtSlug = district.replace(/\s+/g, '-').toLowerCase();
@@ -46,7 +48,7 @@ export default function StateFilterPage() {
         .single();
 
       if (stateError) {
-        console.error('Error fetching districts:', stateError);
+        setNotFound(true);
         setLoading(false);
         return;
       }
@@ -75,7 +77,7 @@ export default function StateFilterPage() {
           .eq('district', districtMatch);
 
         if (error) {
-          console.error('Error fetching companies by district:', error);
+          setNotFound(true);
           setLoading(false);
           return;
         }
@@ -91,7 +93,7 @@ export default function StateFilterPage() {
           .contains('category', [category]);
 
         if (error) {
-          console.error('Error fetching companies by category:', error);
+          setNotFound(true);
           setLoading(false);
           return;
         }
@@ -99,12 +101,29 @@ export default function StateFilterPage() {
         filteredCompanies = data;
       }
 
+      if (!filteredCompanies || filteredCompanies.length === 0) {
+        setNotFound(true);
+        setLoading(false);
+        return;
+      }
+
       setCompanies(filteredCompanies);
       setLoading(false);
     };
 
     fetchData();
-  }, [params.state, params.filter]); // ✅ Key fix
+  }, [params.state, params.filter]);
+
+  if (notFound) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold text-pink-600 mb-4">404 - Not Found</h1>
+        <p className="text-gray-600 mb-8">The district or category you are looking for does not exist or the URL is incorrect.</p>
+        <Link href={`/${params.state}`}
+          className="px-6 py-2 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition">Back to State</Link>
+      </div>
+    );
+  }
 
   return (
     <StateCompanyLayout

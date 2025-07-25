@@ -136,18 +136,13 @@ export default function StateCompanyLayout({
                           else if (labelLc === 'on-grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
                           else badgeClass = 'bg-pink-100 text-pink-700 border-pink-200';
                           return (
-                            <span key={label} className="relative group">
-                              <Link
-                                href={`/${stateName.replace(/\s+/g, '-').toLowerCase()}/${labelLc}`}
-                                className={`px-3 py-1 text-xs rounded-full font-semibold border ${badgeClass}`}
-                              >
-                                {displayLabel}
-                              </Link>
-                              <span className="absolute left-1/2 -translate-x-1/2 -top-9 z-20 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 px-3 py-1 bg-pink-600 text-white text-xs rounded shadow-lg whitespace-nowrap">
-                                Click me to filter
-                                <span className="absolute left-1/2 -translate-x-1/2 top-full w-2 h-2 bg-pink-600 rotate-45"></span>
-                              </span>
-                            </span>
+                            <Link
+                              key={label}
+                              href={`/${stateName.replace(/\s+/g, '-').toLowerCase()}/${labelLc}`}
+                              className={`px-3 py-1 text-xs rounded-full font-semibold border ${badgeClass}`}
+                            >
+                              {displayLabel}
+                            </Link>
                           );
                         })}
                       </div>
