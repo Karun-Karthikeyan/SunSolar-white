@@ -60,14 +60,14 @@ export default function StateCompanyLayout({
                   </div>
                 </div>
             
-                {/* Only one clear filter button for both filters */}
-                {(selectedDistrict || selectedCategory) && (
+                {/* Only one clear filter button for both filters, placed next to filters */}
+                {(selectedDistrict || (typeof window !== 'undefined' && window.location.pathname.split('/').length === 3)) && (
                   <button
                     onClick={handleClearFilters}
                     className="w-full md:w-auto px-5 py-2 rounded-full border border-pink-400 text-pink-600 bg-pink-50 font-semibold transition-all duration-200 hover:bg-pink-100 hover:text-pink-800 shadow-sm whitespace-nowrap"
                     disabled={loading}
                   >
-                    Clear Filters
+                    Clear Filter
                   </button>
                 )}
               </div>
@@ -103,7 +103,7 @@ export default function StateCompanyLayout({
                 filteredCompanies.map((company, idx) => (
                   <div
                     key={company.slug || company.id}
-                    className="w-full max-w-[370px] min-h-[320px] bg-white rounded-xl shadow-md flex flex-col border border-gray-100 transition-all duration-300 p-6 mb-6 hover:shadow-2xl hover:scale-[1] hover:-translate-y-1 hover:border-pink-200"
+                    className="w-full max-w-[370px] min-h-[320px] bg-white rounded-xl shadow-md flex flex-col border border-gray-100 transition-all duration-300 p-6 mb-6 transform hover:scale-100 hover:-translate-y-3 hover:border-pink-400 hover:shadow-2xl hover:z-10"
                     style={{ minWidth: '0' }}
                   >
                     <div className="flex flex-col flex-1 justify-between h-full">
@@ -127,26 +127,47 @@ export default function StateCompanyLayout({
                       <p className="text-sm text-gray-700 mb-4 line-clamp-3">{company.description || `${company['company-name'] || company.name} is a leading provider of solar energy solutions, offering residential, commercial, and industrial solar panel installations.`}</p>
                       {/* Tags (category badge) */}
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {(() => {
+                        {(Array.isArray(company.category) ? company.category : [company.category || 'Other']).map((label) => {
+                          const labelLc = typeof label === 'string' ? label.trim().toLowerCase() : '';
+                          const displayLabel = typeof label === 'string' ? label.replace(/\b\w/g, c => c.toUpperCase()) : '';
                           let badgeClass = '';
-                          let label = company.category || 'Other';
-                          if (label.toLowerCase() === 'residential') badgeClass = 'bg-green-100 text-green-800 border-green-300';
-                          else if (label.toLowerCase() === 'commercial') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
-                          else if (label.toLowerCase() === 'on-grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
+                          if (labelLc === 'residential') badgeClass = 'bg-green-100 text-green-800 border-green-300';
+                          else if (labelLc === 'commercial') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
+                          else if (labelLc === 'on-grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
                           else badgeClass = 'bg-pink-100 text-pink-700 border-pink-200';
-                          // Capitalize first letter
-                          const capLabel = label.charAt(0).toUpperCase() + label.slice(1);
                           return (
-                            <span className={`px-3 py-1 text-xs rounded-full font-semibold border ${badgeClass}`}>{capLabel}</span>
+                            <span key={label} className="relative group">
+                              <Link
+                                href={`/${stateName.replace(/\s+/g, '-').toLowerCase()}/${labelLc}`}
+                                className={`px-3 py-1 text-xs rounded-full font-semibold border ${badgeClass}`}
+                              >
+                                {displayLabel}
+                              </Link>
+                              <span className="absolute left-1/2 -translate-x-1/2 -top-9 z-20 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 px-3 py-1 bg-pink-600 text-white text-xs rounded shadow-lg whitespace-nowrap">
+                                Click me to filter
+                                <span className="absolute left-1/2 -translate-x-1/2 top-full w-2 h-2 bg-pink-600 rotate-45"></span>
+                              </span>
+                            </span>
                           );
-                        })()}
+                        })}
                       </div>
                       {/* Button */}
                       <Link
                         href={`/${stateName.replace(/\s+/g, '-').toLowerCase()}/${(company.district || company.category)?.replace(/\s+/g, '-').toLowerCase()}/${(company.slug || '').toLowerCase()}`}
-                        className="w-full block font-semibold px-4 py-2 text-base rounded-lg shadow-sm transition-colors duration-200 bg-pink-600 text-white hover:bg-pink-700 text-center mt-auto"
+                        className="w-full group block font-semibold px-4 py-2 text-base rounded-lg shadow-sm bg-pink-600 text-white hover:bg-pink-700 text-center mt-auto transition-transform transition-shadow duration-200 transform"
                       >
-                        View Details
+                        <span className="inline-flex items-center justify-center w-full">
+                          View Details
+                          <svg
+                            className="ml-2 w-5 h-5 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </span>
                       </Link>
                     </div>
                   </div>

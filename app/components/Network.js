@@ -40,30 +40,30 @@ export default function Network(){
                             
                             {/* Card Section */}
                             <div className="hidden lg:block">
-                                <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 border border-gray-300 shadow-2xl">
+                                <div className=" backdrop-blur-sm rounded-3xl p-8 border border-gray-300 shadow-2xl">
                                     <div className="text-center text-black">
                                         <div className="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                                             <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                             </svg>
                                         </div>
-                                        <h4 className="text-2xl font-bold mb-4">Why Join Our Network?</h4>
+                                        <h4 className="text-2xl font-bold mb-4 text-white">Why Join Our Network?</h4>
                                         <div className="space-y-4 text-left">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                                <span className="text-gray-500 text-sm sm:text-sm">Access to qualified leads</span>
+                                                <span className="text-white text-sm sm:text-sm">Access to qualified leads</span>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                                <span className="text-gray-500 text-sm sm:text-sm">Verified customer reviews</span>
+                                                <span className="text-white text-sm sm:text-sm">Verified customer reviews</span>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                                <span className="text-gray-500 text-sm sm:text-sm">Marketing support</span>
+                                                <span className="text-white text-sm sm:text-sm">Marketing support</span>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                                <span className="text-gray-500 text-sm sm:text-sm">Technical assistance</span>
+                                                <span className="text-white text-sm sm:text-sm">Technical assistance</span>
                                             </div>
                                         </div>
                                     </div>

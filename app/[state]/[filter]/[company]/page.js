@@ -2,6 +2,7 @@
 
 import { use, useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function CompanyDetailPage({ params }) {
   const { state, district, company } = use(params);
@@ -83,18 +84,21 @@ export default function CompanyDetailPage({ params }) {
                 {/* Category Badges */}
                 <div className="flex flex-wrap gap-2 mt-2 mb-2 w-full justify-start mt-3">
                   {companyData.categories.map((cat) => {
+                    const catLc = typeof cat === 'string' ? cat.trim().toLowerCase() : '';
+                    const displayCat = typeof cat === 'string' ? cat.replace(/\b\w/g, c => c.toUpperCase()) : '';
                     let badgeClass = '';
-                    if (cat === 'Residential') badgeClass = 'bg-green-100 text-green-800 border-green-300';
-                    else if (cat === 'Commercial') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
-                    else if (cat === 'On-Grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
-                    else badgeClass = 'bg-pink-100 text-pink-800 border-pink-300';
+                    if (catLc === 'residential') badgeClass = 'bg-green-100 text-green-800 border-green-300';
+                    else if (catLc === 'commercial') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
+                    else if (catLc === 'on-grid') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
+                    else badgeClass = 'bg-pink-100 text-pink-700 border-pink-200';
                     return (
-                      <span
+                      <Link
                         key={cat}
-                        className={`inline-block px-3 py-1 rounded-full text-sm font-medium border ${badgeClass}`}
+                        href={`/${stateLc}/${catLc}`}
+                        className={`inline-block px-3 py-1 rounded-full text-sm font-medium border ${badgeClass} hover:underline`}
                       >
-                        {cat}
-                      </span>
+                        {displayCat}
+                      </Link>
                     );
                   })}
                 </div>

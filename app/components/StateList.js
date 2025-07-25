@@ -52,39 +52,57 @@ export default function StatesList() {
   };
 
   return (
-    <section className="py-15 bg-white relative">
-      
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-            Find Solar Companies by State
-          </h2>
-          <p className="text-lg text-black max-w-2xl mx-auto">
-            Discover top-rated solar companies and installers across all states of India. 
-            Get quotes, compare prices, and find the best solar solutions for your location.
-          </p>
+    <>
+      <section className="py-15 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              Find Solar Companies by State
+            </h2>
+            <p className="text-lg text-black max-w-2xl mx-auto">
+              Discover top-rated solar companies and installers across all states of India. 
+              Get quotes, compare prices, and find the best solar solutions for your location.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+            {indianStates.map((state) => (
+              <div
+                key={state.slug}
+                onClick={() => !loadingState && handleStateClick(state.slug)}
+                className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-4 text-center border border-gray-300 hover:border-pink-500 ${
+                  loadingState ? 'cursor-not-allowed opacity-50' : 'cursor-pointer group'
+                } animated-glow`}
+              >
+                <h3 className="font-semibold text-black text-sm md:text-base group-hover:text-pink-400 transition-colors duration-300">
+                  {state.name}
+                </h3>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <p className="text-black text-sm">
+              Click on any state to find solar companies and get free quotes
+            </p>
+          </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
-          {indianStates.map((state) => (
-            <div
-              key={state.slug}
-              onClick={() => !loadingState && handleStateClick(state.slug)}
-              className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-4 text-center border border-gray-300 hover:border-pink-500 ${
-                loadingState ? 'cursor-not-allowed opacity-50' : 'cursor-pointer group'
-              } animated-glow`}
-            >
-              <h3 className="font-semibold text-black text-sm md:text-base group-hover:text-pink-400 transition-colors duration-300">
-                {state.name}
-              </h3>
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <p className="text-black text-sm">
-            Click on any state to find solar companies and get free quotes
-          </p>
+      </section>
+      {/* Animated Straight Line Divider with Moving Ball */}
+      <div className="w-full flex justify-center items-center my-12">
+        <div className="relative w-64 h-6">
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 rounded-full -translate-y-1/2"></div>
+          <span className="absolute top-1/2 w-5 h-5 bg-pink-500 rounded-full shadow-lg animate-ball-horizontal" style={{ left: 0, transform: 'translateY(-50%)' }}></span>
         </div>
       </div>
-    </section>
+      <style jsx>{`
+        @keyframes ball-horizontal {
+          0%   { left: 0; }
+          50%  { left: calc(100% - 1.25rem); }
+          100% { left: 0; }
+        }
+        .animate-ball-horizontal {
+          animation: ball-horizontal 8s ease-in-out infinite;
+        }
+      `}</style>
+    </>
   );
 }

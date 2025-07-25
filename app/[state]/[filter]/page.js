@@ -88,7 +88,7 @@ export default function StateFilterPage() {
           .from('solar_companies')
           .select('*')
           .eq('state-name', stateName)
-          .eq('category', category);
+          .contains('category', [category]);
 
         if (error) {
           console.error('Error fetching companies by category:', error);
