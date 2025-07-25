@@ -6,7 +6,7 @@
 
 ## 🚀 Live Demo
 
-**🔗 Website**: [https://sun-solar-white.vercel.app](https://sun-solar-white.vercel.app)
+**🔗 Website**[https://sun-solar-white.vercel.app](https://sun-solar-white-ochre.vercel.app/)
 
 ---
 
